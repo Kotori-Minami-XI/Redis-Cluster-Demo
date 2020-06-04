@@ -1,0 +1,24 @@
+# Open redis client
+/home/keming/tool/redis/redis-6379/bin/redis-server /home/keming/tool/redis/rediscluster/8001/redis.conf
+/home/keming/tool/redis/redis-6379/bin/redis-server /home/keming/tool/redis/rediscluster/8004/redis.conf
+
+/home/keming/tool/redis/redis-6379/bin/redis-server /home/keming/tool/redis/rediscluster/8002/redis.conf
+/home/keming/tool/redis/redis-6379/bin/redis-server /home/keming/tool/redis/rediscluster/8005/redis.conf
+
+/home/keming/tool/redis/redis-6379/bin/redis-server /home/keming/tool/redis/rediscluster/8003/redis.conf
+/home/keming/tool/redis/redis-6379/bin/redis-server /home/keming/tool/redis/rediscluster/8006/redis.conf
+
+# Enable redis cluster
+
+./redis-cli -a kotori --cluster create --cluster-replicas 1 192.168.111.10:8001 192.168.111.11:8002 192.168.111.12:8003 192.168.111.10:8004 192.168.111.11:8005 192.168.111.12:8006
+
+
+# shutdown redis cluster
+/home/keming/tool/redis/redis-6379/bin/redis-cli -a kotori -c -h 192.168.111.10 -p 8001 shutdown
+/home/keming/tool/redis/redis-6379/bin/redis-cli -a kotori -c -h 192.168.111.10 -p 8004 shutdown
+
+/home/keming/tool/redis/redis-6379/bin/redis-cli -a kotori -c -h 192.168.111.11 -p 8002 shutdown
+/home/keming/tool/redis/redis-6379/bin/redis-cli -a kotori -c -h 192.168.111.11 -p 8005 shutdown
+
+/home/keming/tool/redis/redis-6379/bin/redis-cli -a kotori -c -h 192.168.111.12 -p 8003 shutdown
+/home/keming/tool/redis/redis-6379/bin/redis-cli -a kotori -c -h 192.168.111.12 -p 8006 shutdown
